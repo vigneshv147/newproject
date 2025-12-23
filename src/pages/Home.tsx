@@ -37,7 +37,7 @@ import { useToast } from '@/hooks/use-toast';
 const platformFeatures = [
   { icon: MessageSquare, label: 'Secure Messages', path: '/messages', color: 'from-cyan-500 to-blue-500' },
   { icon: Shield, label: 'Security Center', path: '/security', color: 'from-emerald-500 to-cyan-500' },
-  { icon: Activity, label: 'Tor Analysis', path: '/tor-analysis', color: 'from-purple-500 to-pink-500' },
+  { icon: Activity, label: 'Tor Analysis', path: 'https://www.tn-police-cyberwing-project-chameleon.tech/', color: 'from-purple-500 to-pink-500', isExternal: true },
   { icon: AlertTriangle, label: 'Safe Modes', path: '/safe-modes', color: 'from-amber-500 to-orange-500' },
   { icon: Settings, label: 'Settings', path: '/settings', color: 'from-slate-400 to-slate-600' },
 ];
@@ -319,23 +319,44 @@ export default function Home() {
         {/* Platform Features - Horizontal Row */}
         <div className="max-w-[1600px] mx-auto px-4 py-4 relative z-10">
           <div className="grid grid-cols-5 gap-3 mb-4">
-            {platformFeatures.map((feature, i) => (
-              <Link
-                key={i}
-                to={feature.path}
-                className="group bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-4 hover:border-cyan-500/50 transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center`}>
-                    <feature.icon className="w-5 h-5 text-white" />
+            {platformFeatures.map((feature: any, i) => (
+              feature.isExternal ? (
+                <a
+                  key={i}
+                  href={feature.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-4 hover:border-cyan-500/50 transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center`}>
+                      <feature.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">{feature.label}</p>
+                      <p className="text-[10px] text-slate-500">Click to access</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-cyan-400 transition-colors" />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">{feature.label}</p>
-                    <p className="text-[10px] text-slate-500">Click to access</p>
+                </a>
+              ) : (
+                <Link
+                  key={i}
+                  to={feature.path}
+                  className="group bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-4 hover:border-cyan-500/50 transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center`}>
+                      <feature.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">{feature.label}</p>
+                      <p className="text-[10px] text-slate-500">Click to access</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-cyan-400 transition-colors" />
                   </div>
-                  <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-cyan-400 transition-colors" />
-                </div>
-              </Link>
+                </Link>
+              )
             ))}
           </div>
 
