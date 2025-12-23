@@ -1,0 +1,9 @@
+flask
+flask-cors
+pandas
+numpy
+joblib
+scikit-learn
+tensorflow
+python-multipart
+python-magic
